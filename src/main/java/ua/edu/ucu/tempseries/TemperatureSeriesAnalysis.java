@@ -6,8 +6,9 @@ public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
+        int err = -237;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] < -237) {
+            if (temperatureSeries[i] < err) {
                 throw new InputMismatchException();
             }
         }
@@ -21,10 +22,11 @@ public class TemperatureSeriesAnalysis {
         double sum = 0;
         for (int i = 0; i < temperatureSeries.length; i++) {
             sum += temperatureSeries[i]; }
-        return Math.round(sum/temperatureSeries.length * 100.0)/100.0;
+        return sum/temperatureSeries.length;
         }
 
     public double deviation() {
+        double rounder = 10.0;
         if (temperatureSeries.length == 0) {
             throw new IllegalArgumentException();
         }
@@ -35,7 +37,7 @@ public class TemperatureSeriesAnalysis {
                     * (temperatureSeries[i] - mean);
         }
         double square = Math.sqrt(deviation/temperatureSeries.length);
-        return Math.round(square * 10.0)/10.0;
+        return Math.round(square * rounder)/rounder;
     }
 
     public double min() {
@@ -106,8 +108,8 @@ public class TemperatureSeriesAnalysis {
         }
         int indx = 0;
         double[] res = new double[temperatureSeries.length];
-        for(int i = 0; i < temperatureSeries.length; i++){
-            if (temperatureSeries[i] < tempValue){
+        for (int i = 0; i < temperatureSeries.length; i++) {
+            if (temperatureSeries[i] < tempValue) {
                 res[indx] = temperatureSeries[i];
                 indx++;
             }
@@ -116,13 +118,13 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] findTempsGreaterThen(double tempValue) {
-        if (temperatureSeries.length == 0){
+        if (temperatureSeries.length == 0) {
             throw new IllegalArgumentException();
         }
         int indx = 0;
         double[] res = new double[temperatureSeries.length];
-        for(int i = 0; i < temperatureSeries.length; i++){
-            if (temperatureSeries[i] > tempValue){
+        for (int i = 0; i < temperatureSeries.length; i++) {
+            if (temperatureSeries[i] > tempValue) {
                 res[indx] = temperatureSeries[i];
                 indx++;
             }
@@ -140,14 +142,15 @@ public class TemperatureSeriesAnalysis {
     }
 
     public int addTemps(double... temps) {
-        for (int i = 0; i < temps.length; i++){
-            if (temps[i] < -273){
+        int err = -273;
+        for (int i = 0; i < temps.length; i++) {
+            if (temps[i] < err) {
                 throw new InputMismatchException();
             }
         }
         int currentLength = temperatureSeries.length;
         double[] arr = new double[currentLength * 2];
-        for (int i = 0; i < currentLength; i++){
+        for (int i = 0; i < currentLength; i++) {
             arr[i] = temperatureSeries[i]; }
 
         int last = currentLength - 1;
