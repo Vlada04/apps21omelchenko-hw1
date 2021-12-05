@@ -154,11 +154,11 @@ public class TemperatureSeriesAnalysis {
             arr[i] = temperatureSeries[i]; }
 
         int last = currentLength - 1;
-        for (int i = 0; i < temps.length; i++){
+        for (int i = 0; i < temps.length; i++) {
             arr[last] = temps[i];
         }
         int sum = 0;
-        for (int i = 0; i < arr.length; i++){
+        for (int i = 0; i < arr.length; i++) {
             sum += arr[i];
         }
         return sum;
