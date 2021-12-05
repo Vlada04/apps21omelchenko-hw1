@@ -1,9 +1,16 @@
 package ua.edu.ucu.tempseries;
 
+import java.util.InputMismatchException;
+
 public class TemperatureSeriesAnalysis {
     double[] temperatureSeries;
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
+        for (int i = 0; i < temperatureSeries.length; i++){
+            if (temperatureSeries[i] < -237){
+                throw new InputMismatchException();
+            }
+        }
         this.temperatureSeries = temperatureSeries;
     }
 
@@ -128,8 +135,25 @@ public class TemperatureSeriesAnalysis {
         return summary;
     }
 
-//    public int addTemps(double... temps) {
-//        for
-//        return 0;
-//    }
+    public int addTemps(double... temps) {
+        for (int i = 0; i < temps.length; i++){
+            if (temps[i] < -273){
+                throw new InputMismatchException();
+            }
+        }
+        int currentLength = temperatureSeries.length;
+        double[] arr = new double[currentLength * 2];
+        for (int i = 0; i < currentLength; i++){
+            arr[i] = temperatureSeries[i];}
+
+        int last = currentLength - 1;
+        for (int i = 0; i < temps.length; i++){
+            arr[last] = temps[i];
+        }
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++){
+            sum += arr[i];
+        }
+        return sum;
+    }
 }
